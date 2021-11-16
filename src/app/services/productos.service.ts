@@ -15,7 +15,6 @@ export class ProductosService {
   }
 
   private cargarProductos() {
-
     this.http.get('https://angular-html-25cf9.firebaseio.com/productos_idx.json')
       .subscribe((resp: any) => {
         // console.log(resp);
@@ -26,4 +25,5 @@ export class ProductosService {
         },1000); */
       });
   }
+  
 }
