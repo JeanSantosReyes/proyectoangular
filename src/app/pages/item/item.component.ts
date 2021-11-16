@@ -10,24 +10,22 @@ import { ProductosService } from 'src/app/services/productos.service';
 })
 export class ItemComponent implements OnInit {
 
-  descripcionproducto: DescripcionProducto = {};
+  producto: DescripcionProducto;
   id: string;
 
   //Para leer URL importamos el servicio en el constructor + Inyeccion del servicio
-  constructor(private route: ActivatedRoute, public productoService: ProductosService) { }
+  constructor(private route: ActivatedRoute,
+    public productoService: ProductosService) { }
 
   //Llamamos la instruccion para obtener parametros al seleccionar un item/producto
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      // console.log(params)
-      this.productoService.getProductos(params['id'])
+    this.route.params
+    .subscribe(parametros => {
+      this.productoService.getProductos(parametros['id'])
         .subscribe((producto: DescripcionProducto) => {
-          // console.log(producto);
-          this.id = params['id'];
-          // console.log(`assets/productos/${this.getId}/pic-1.jpg`)
-          this.descripcionproducto = producto;
+          this.id = parametros['id'];
+          this.producto = producto;
         })
     })
   }
-
 }
