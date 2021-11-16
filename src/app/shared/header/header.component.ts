@@ -15,7 +15,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //Luego de dar enter busca el producto
   buscarProducto(termino: string) {
     if(termino.length<1){
       return;
