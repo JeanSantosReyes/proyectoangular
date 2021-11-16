@@ -11,6 +11,7 @@ import { ProductosService } from 'src/app/services/productos.service';
 export class ItemComponent implements OnInit {
 
   descripcionproducto: DescripcionProducto = {};
+  id: string;
 
   //Para leer URL importamos el servicio en el constructor + Inyeccion del servicio
   constructor(private route: ActivatedRoute, public productoService: ProductosService) { }
@@ -21,7 +22,9 @@ export class ItemComponent implements OnInit {
       // console.log(params)
       this.productoService.getProductos(params['id'])
         .subscribe((producto: DescripcionProducto) => {
-          console.log(producto);
+          // console.log(producto);
+          this.id = params['id'];
+          // console.log(`assets/productos/${this.getId}/pic-1.jpg`)
           this.descripcionproducto = producto;
         })
     })
