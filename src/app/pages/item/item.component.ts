@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DescripcionProducto } from 'src/app/interfaces/descripcion-producto.interface';
+import { ProductosService } from 'src/app/services/productos.service';
 
 @Component({
   selector: 'app-item',
@@ -8,13 +10,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ItemComponent implements OnInit {
 
-  //Para leer URL importamos el servicio en el constructor
-  constructor(private route: ActivatedRoute) { }
+  descripcionproducto: DescripcionProducto = {};
 
-  //Llamamos la instruccion para obtener parametros
+  //Para leer URL importamos el servicio en el constructor + Inyeccion del servicio
+  constructor(private route: ActivatedRoute, public productoService: ProductosService) { }
+
+  //Llamamos la instruccion para obtener parametros al seleccionar un item/producto
   ngOnInit(): void {
-    this.route.params.subscribe(params =>{
-      console.log(params)
+    this.route.params.subscribe(params => {
+      // console.log(params)
+      this.productoService.getProductos(params['id'])
+        .subscribe((producto: DescripcionProducto) => {
+          console.log(producto);
+          this.descripcionproducto = producto;
+        })
     })
   }
 
